@@ -333,6 +333,10 @@ Returns all wallet, transfer, and bill-payment transactions associated with the 
 
 ---
 
+## Sequence Diagram
+
+<img width="5629" height="6808" alt="deepseek_mermaid_20260613_a06f77" src="https://github.com/user-attachments/assets/32f9b15f-c81f-48d8-af3e-df0812e8ccb7" />
+
 
 
 ##  License
