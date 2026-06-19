@@ -18,6 +18,8 @@ const doc = {
   security: [ { bearerAuth: [] } ]
 };
 
+
+
 const outputFile = './swagger-output.json';
 const endpointsFiles = ['./server.js']; // Root file is all that is needed
 

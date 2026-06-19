@@ -65,7 +65,7 @@ const loginUser = async (req, res) => {
         name: user.name,
         email: user.email,
         phone: user.phone,
-        upiId: user.upiId, // New Feature
+        upiId: user.upiId, 
         balance: user.balance,
         hasMpinSet: !!user.mpin, // Returns true if mpin is set
         token: generateToken(user._id),

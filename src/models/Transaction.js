@@ -30,7 +30,28 @@ const transactionSchema = new mongoose.Schema(
       enum: ['SUCCESS', 'FAILED', 'PENDING'],
       default: 'SUCCESS',
     },
+
+    category: {
+  type: String,
+  enum: [
+     'ADD_MONEY',
+    'TRANSFER',
+    'RECHARGE',
+    'ELECTRICITY',
+    'WATER',
+    'GAS',
+    'SHOPPING',
+    'FOOD',
+    'TRAVEL',
+     'WITHDRAW',
+    'OTHER'
+  ],
+  default: 'OTHER'
+},
   },
+
+
+  
   {
     timestamps: true,
   }

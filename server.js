@@ -1,4 +1,4 @@
-// require('dotenv').config();
+
 
 require('dotenv').config();
 const express = require('express');
@@ -9,11 +9,12 @@ const swaggerUi = require('swagger-ui-express');
 // Import routes
 const authRoutes = require('./src/routes/authRoutes');
 const txnRoutes = require('./src/routes/txnRoutes');
-const walletRoutes = require('./src/routes/walletRoutes'); // New Routes
+const walletRoutes = require('./src/routes/walletRoutes'); 
+const aiRoutes = require('./src/routes/aiRoutes');
 
 let swaggerDocument = {};
 try {
-  swaggerDocument = require('./swagger.json');
+  swaggerDocument = require('./swagger-output.json');
 } catch (e) {
   console.log("Swagger doc not generated yet. Run 'npm run swagger'");
 }
@@ -34,7 +35,8 @@ app.get('/', (req, res) => {
 // App Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/transactions', txnRoutes);
-app.use('/api/wallet', walletRoutes); // Integrated Wallet Routes
+app.use('/api/wallet', walletRoutes); 
+app.use('/api/ai', aiRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
