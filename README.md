@@ -321,6 +321,18 @@ Returns all wallet, transfer, and bill-payment transactions associated with the 
 
 ---
 
+### AI Transaction Insights
+
+```http
+GET /api/ai/summary
+```
+
+**Authorization:** `Bearer YOUR_TOKEN`
+
+Returns AI-powered financial insights for the authenticated user by analyzing transaction data. The response includes a financial summary, category-wise expense breakdown, key spending insights, personalized recommendations, and additional financial metrics generated using the Google Gemini API.
+
+---
+
 ##  Security Features
 
 * JWT Authentication
