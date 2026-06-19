@@ -53,6 +53,12 @@ Designed with scalability, clean architecture, and beginner-friendly code organi
 * Wallet top-up records
 * Timestamped transaction tracking
 
+### AI Transaction Insights
+
+* category-wise expense breakdown
+* key spending insights
+* personalized recommendations
+
 ###  API Documentation
 
 * Swagger UI integration
@@ -118,6 +124,8 @@ PORT=5000
 MONGO_URI=mongodb://127.0.0.1:27017/finpay
 
 JWT_SECRET=your_super_secret_key
+
+GEMINI_API_KEY=your gemini api key
 ```
 
 For production deployments, replace the MongoDB URI with your MongoDB Atlas connection string.
@@ -125,6 +133,10 @@ For production deployments, replace the MongoDB URI with your MongoDB Atlas conn
 ---
 
 ##  Running the Project
+
+## Run seed file
+
+node seed.js
 
 ### Development Mode
 
