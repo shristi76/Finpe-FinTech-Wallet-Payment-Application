@@ -22,9 +22,9 @@ const registerUser = async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    // Dynamic UPI Generation (Example: amit954@phonepe)
+    // Dynamic UPI Generation (Example: amit954@finpe)
     const sanitizedName = name.replace(/\s/g, '').toLowerCase();
-    const upiId = `${sanitizedName}${Math.floor(Math.random() * 10000)}@phonepe`;
+    const upiId = `${sanitizedName}${Math.floor(Math.random() * 10000)}@finpe`;
 
     const user = await User.create({
       name,
@@ -100,8 +100,8 @@ const setupMpin = async (req, res) => {
   try {
     const { mpin } = req.body; // Expecting a 4 or 6 digit string
 
-    if (!mpin || mpin.length < 4) {
-      return res.status(400).json({ message: 'Please provide a valid MPIN (at least 4 digits)' });
+    if (!/^\d{4}$/.test(String(mpin))) {
+      return res.status(400).json({ message: 'Please provide a valid 4-digit MPIN' });
     }
 
     const salt = await bcrypt.genSalt(10);

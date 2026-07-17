@@ -15,7 +15,7 @@ const getAISummary = async (req, res) => {
       .populate('sender', 'name')
       .populate('receiver', 'name');
 
-    const summary = await generateSummary(transactions);
+    const summary = await generateSummary(transactions, userId);
 
     res.json({
       success: true,

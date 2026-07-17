@@ -1,0 +1,381 @@
+:root {
+  font-family: Inter, ui-sans-serif, system-ui, Arial, sans-serif;
+  color: #1c2a21;
+  background: #f5f7f5;
+}
+
+/* Reset */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+/* Layout */
+.dashboard {
+  width: min(100% - 32px, 1040px);
+  margin: auto;
+  padding: 22px 0 48px;
+}
+
+nav {
+  height: 54px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Brand */
+.brand {
+  color: #000000;
+  font-size: 29px;
+  font-weight: 800;
+  letter-spacing: -1.5px;
+}
+
+.brand span {
+  color: #000000;
+}
+
+/* Buttons */
+button {
+  width: 100%;
+  padding: 11px 15px;
+  border: 0;
+  border-radius: 8px;
+  background: #31a46d;
+  color: #fff;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.text-button {
+  width: auto;
+  padding: 8px 0;
+  background: transparent;
+  color: #b52e2e;
+}
+
+.secondary-button {
+  width: auto;
+  padding: 8px 12px;
+  font-size: 13px;
+}
+
+/* Balance Card */
+.balance-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 28px;
+
+  margin: 16px 0;
+  padding: 30px;
+
+  border-radius: 18px;
+  background: #fefffa;
+  color: #080707;
+}
+
+.balance-card .eyebrow {
+  color: #000000;
+}
+
+.balance-card p {
+  margin: 0;
+  color: #000000;
+  font-size: 14px;
+}
+
+/* Typography */
+.eyebrow {
+  display: block;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  color: #6a8272;
+}
+
+h1 {
+  margin: 7px 0;
+  font-size: clamp(32px, 5vw, 46px);
+  letter-spacing: -1.5px;
+}
+
+h2 {
+  margin: 5px 0 8px;
+  font-size: 20px;
+}
+
+p {
+  line-height: 1.5;
+}
+
+.muted {
+  color: #718076;
+  font-size: 14px;
+}
+
+em {
+  color: #839087;
+  font-style: normal;
+  font-weight: 500;
+}
+
+/* Top Up Card */
+.topup-card {
+  min-width: 270px;
+  padding: 14px;
+
+  border-radius: 12px;
+  background: #fff;
+  color: #1c2a21;
+}
+
+.topup-card strong {
+  display: block;
+  margin-top: 3px;
+}
+
+.topup-controls {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.topup-controls input {
+  margin: 0;
+  min-width: 0;
+}
+
+.topup-controls button {
+  width: auto;
+  white-space: nowrap;
+}
+
+/* Content */
+.content-grid {
+  display: grid;
+  grid-template-columns: minmax(290px, 0.9fr) minmax(330px, 1.1fr);
+  gap: 18px;
+  margin-top: 18px;
+}
+
+.history-wrap {
+  margin-top: 18px;
+}
+
+/* Panels */
+.panel,
+.auth-card {
+  padding: 22px;
+
+  background: #fff;
+  border: 1px solid #e4ebe5;
+  border-radius: 15px;
+  box-shadow: 0 8px 24px rgb(34 72 47 / 5%);
+}
+
+.panel-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+
+  margin-bottom: 14px;
+}
+
+.setup-panel {
+  max-width: 460px;
+  margin-top: 18px;
+}
+
+/* Forms */
+label {
+  display: block;
+  margin: 13px 0;
+
+  font-size: 13px;
+  font-weight: 700;
+}
+
+input {
+  display: block;
+  width: 100%;
+  margin-top: 6px;
+  padding: 11px 12px;
+
+  font: inherit;
+
+  background: #fff;
+  border: 1px solid #d5ded7;
+  border-radius: 8px;
+
+  outline-color: #31a46d;
+}
+
+/* Notice */
+.notice {
+  margin: 16px 0 0;
+  padding: 11px 13px;
+
+  border-radius: 9px;
+
+  background: #e5f5eb;
+  color: #185d3b;
+}
+
+/* Code Block */
+pre {
+  margin: 14px 0 0;
+  padding: 14px;
+
+  white-space: pre-wrap;
+
+  background: #f4f7f5;
+  border-radius: 9px;
+
+  color: #38473d;
+  font: 13px/1.6 inherit;
+}
+
+/* Badge */
+.count {
+  padding: 5px 8px;
+
+  border-radius: 999px;
+  background: #edf6f0;
+
+  color: #277a50;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* Activity List */
+.activity-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.activity-list li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 13px 0;
+  border-bottom: 1px solid #edf1ee;
+}
+
+.activity-list li:last-child {
+  border-bottom: 0;
+}
+
+/* Transaction */
+.transaction-icon {
+  flex: 0 0 30px;
+  height: 30px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 50%;
+  font-weight: 800;
+}
+
+.incoming {
+  background: #e7f6ec;
+  color: #237e50;
+}
+
+.outgoing {
+  background: #fceceb;
+  color: #c04c47;
+}
+
+.transaction-copy {
+  flex: 1;
+  min-width: 0;
+}
+
+.transaction-copy strong,
+.transaction-copy small {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.transaction-copy small {
+  margin-top: 3px;
+  color: #77837b;
+  font-size: 12px;
+}
+
+.credit {
+  color: #237e50;
+}
+
+.debit {
+  color: #c04c47;
+}
+
+/* Authentication */
+.auth-page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+}
+
+.auth-card {
+  width: min(100%, 390px);
+}
+
+.auth-card > p {
+  color: #718076;
+}
+
+/* Responsive */
+@media (max-width: 720px) {
+  .balance-card {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 18px;
+    padding: 23px;
+  }
+
+  .topup-card {
+    min-width: 0;
+  }
+
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 420px) {
+  .dashboard {
+    width: min(100% - 22px, 1040px);
+  }
+
+  .balance-card,
+  .panel {
+    padding: 18px;
+  }
+
+  .topup-controls {
+    flex-direction: column;
+  }
+
+  .topup-controls button {
+    width: 100%;
+  }
+}

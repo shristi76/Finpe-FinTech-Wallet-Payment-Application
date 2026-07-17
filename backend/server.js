@@ -29,7 +29,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.get('/', (req, res) => {
-  res.send('PhonePe Clone Backend is running...');
+  res.send('Backend is running...');
 });
 
 // App Routes

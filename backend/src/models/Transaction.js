@@ -7,8 +7,9 @@ const transactionSchema = new mongoose.Schema(
       ref: 'User',
       required: true,
     },
-    receiver: {
+receiver: {
       type: mongoose.Schema.Types.ObjectId,
+
       ref: 'User',
       // Optional now because we might have BILL_PAY or WITHDRAW where receiver is not a user
     },
@@ -21,6 +22,11 @@ const transactionSchema = new mongoose.Schema(
     billerName: {
       type: String, // e.g. "Jio Mobile Recharge" or "Adani Electricity"
     },
+    description: {
+      type: String,
+      trim: true,
+      maxlength: 200,
+    },
     amount: {
       type: Number,
       required: true,
@@ -29,6 +35,10 @@ const transactionSchema = new mongoose.Schema(
       type: String,
       enum: ['SUCCESS', 'FAILED', 'PENDING'],
       default: 'SUCCESS',
+    },
+    idempotencyKey: {
+      type: String,
+      trim: true,
     },
 
     category: {

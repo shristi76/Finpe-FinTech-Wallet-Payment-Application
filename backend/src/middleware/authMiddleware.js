@@ -18,8 +18,8 @@ const protect = async (req, res, next) => {
 
       // Find user in database, exclude password
       req.user = await User.findById(decoded.id).select('-password');
-
-      next(); // Move to the next middleware or route controller
+      if (!req.user) return res.status(401).json({ message: 'Not authorized, user not found' });
+      return next();
     } catch (error) {
       res.status(401).json({ message: 'Not authorized, token failed' });
     }
