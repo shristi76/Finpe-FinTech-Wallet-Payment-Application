@@ -1,4 +1,4 @@
-# FinPay – Scalable FinTech Wallet & Payment Backend
+# FinPe – Scalable FinTech Wallet & Payment Application
 
 A production-inspired **FinTech Wallet & Payment Backend** built with the MERN ecosystem. FinPay simulates core digital payment functionalities similar to modern wallet applications, including authentication, wallet management, peer-to-peer transfers, MPIN security, transaction history tracking, and bill payments along with AI transaction insights.
 
@@ -74,6 +74,11 @@ Designed with scalability, clean architecture, and beginner-friendly code organi
 ---
 
 ##  Tech Stack
+
+### Frontend 
+
+* React.js
+* CSS
 
 ### Backend
 
