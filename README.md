@@ -73,6 +73,10 @@ Designed with scalability, clean architecture, and beginner-friendly code organi
 
 ---
 
+## LIVE 
+https://finpee.netlify.app/
+
+---
 ##  Tech Stack
 
 ### Frontend 
