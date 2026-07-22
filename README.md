@@ -78,8 +78,8 @@ finpe/
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/shristi76/Finpay-Scalable-FinTech-Wallet-Payment-Backend.git
-cd Finpay-Scalable-FinTech-Wallet-Payment-Backend
+git clone https://github.com/shristi76/Finpe-FinTech-Wallet-Payment-Application
+cd Finpe-FinTech-Wallet-Payment-Application
 ```
 
 ### 2. Install dependencies
