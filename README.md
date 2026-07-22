@@ -1,370 +1,187 @@
-# FinPe – Scalable FinTech Wallet & Payment Application
+Finpe — Scalable FinTech Wallet & Payment Application
 
-A production-inspired **FinTech Wallet & Payment Backend** built with the MERN ecosystem. FinPay simulates core digital payment functionalities similar to modern wallet applications, including authentication, wallet management, peer-to-peer transfers, MPIN security, transaction history tracking, and bill payments along with AI transaction insights.
+Finpe is a full-stack digital wallet application inspired by modern UPI payment apps. Users can register, set a secure MPIN, add demo money, transfer money using a phone number or Finpe UPI ID, track payments, and generate AI-powered transaction insights.
 
-Designed with scalability, clean architecture, and beginner-friendly code organization in mind.
+The project also implements **idempotency keys** so a repeated payment request is processed only once, preventing accidental duplicate wallet deductions.
 
----
+## Live demo
 
-##  Features
+- Frontend: [https://finpee.netlify.app/](https://finpee.netlify.app/)
+- Backend API: [finpay-scalable-fintech-wallet-payment.onrender.com](https://finpay-scalable-fintech-wallet-payment.onrender.com/)
+- Swagger API docs: [API documentation](https://finpay-scalable-fintech-wallet-payment.onrender.com/api-docs)
 
-###  Authentication & Security
+## Features
 
-* JWT-based User Registration & Login
-* Secure password hashing using Bcrypt
-* Protected routes with middleware authentication
-* User profile management
-* 4-Digit MPIN setup and verification for sensitive transactions
+- JWT-based registration and login
+- Secure password hashing with Bcrypt
+- Protected API routes
+- Four-digit MPIN setup and payment verification
+- Demo wallet top-ups
+- Money transfers using a phone number or `@finpe` UPI ID
+- Optional transfer descriptions, such as “Buying books”
+- Clear transaction history for wallet top-ups, sent, received, and bill payments
+- AI transaction insights based on payment activity and descriptions
+- Idempotent transfer and bill-payment requests to prevent duplicate payments
+- Swagger documentation and Postman collection
 
-###  User Management
+## Idempotency
 
-* Register using Name, Email, Phone Number, and Password
-* Unique user identification via Email or Phone Number
-* Profile retrieval endpoint
+Each transfer and bill payment requires an `Idempotency-Key` request header. The frontend generates this key automatically for a new payment.
 
-###  Wallet System
+The backend stores a payment request using the authenticated user and key, along with a fingerprint of the payment details.
 
-* Digital wallet balance management
-* Add money to wallet
-* Real-time balance updates
-* Transaction-safe wallet operations
+```text
+First request with a key        → Payment is processed once
+Same key + same payment details → Previous successful response is returned
+Same key + changed details      → 409 Conflict
+```
 
-###  Peer-to-Peer Transfers
+This protects users from double-clicks, automatic retries, and unreliable network connections.
 
-* Send money using:
+## Tech stack
 
-  * Email Address
-  * Phone Number
-* MPIN verification before processing transfers
-* Balance validation checks
-* Automatic transaction logging
+| Area | Technologies |
+| --- | --- |
+| Frontend | React, Vite, CSS |
+| Backend | Node.js, Express.js |
+| Database | MongoDB, Mongoose |
+| Authentication | JWT, BcryptJS |
+| AI insights | Google Gemini API |
+| API testing | Swagger UI, Postman |
 
-###  Bill Payments
+## Project structure
 
-* Simulated utility bill payments
-* MPIN-protected transactions
-* Wallet deduction handling
-* Transaction history generation
+```text
+finpe/
+├── backend/
+│   ├── src/
+│   │   ├── config/          # MongoDB connection
+│   │   ├── controllers/     # Request handling
+│   │   ├── middleware/      # JWT authentication
+│   │   ├── models/          # User, transaction, and payment request schemas
+│   │   ├── routes/          # API routes
+│   │   └── services/        # AI and idempotency services
+│   ├── server.js
+│   ├── seed.js
+│   └── .env
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   └── App.jsx
+│   ├── index.html
+│   └── vite.config.js
+└── package.json
+```
 
-###  Transaction History
+## Local setup
 
-* Complete transfer records
-* Bill payment records
-* Wallet top-up records
-* Timestamped transaction tracking
-
-### AI Transaction Insights
-
-* category-wise expense breakdown
-* key spending insights
-* personalized recommendations
-
-###  API Documentation
-
-* Swagger UI integration
-* Interactive API testing
-* Request/Response schema visualization
-
-###  Postman Collection
-
-* Ready-to-use API collection
-* JWT token automation support
-* Easy endpoint testing workflow
-
----
-
-## LIVE 
-https://finpee.netlify.app/
-
----
-##  Tech Stack
-
-### Frontend 
-
-* React.js
-* CSS
-
-### Backend
-
-* Node.js
-* Express.js
-
-### Database
-
-* MongoDB
-* Mongoose
-
-### Security
-
-* JWT (JSON Web Tokens)
-* BcryptJS
-
-### Documentation & Testing
-
-* Swagger UI
-* Postman
-
----
-
-
-## ⚙️ Installation
-
-### 1. Clone Repository
+### 1. Clone the repository
 
 ```bash
-git clone https://github.com/shristi76/Finpay-Scalable-FinTech-Wallet-Payment-Backend
-
+git clone https://github.com/shristi76/Finpay-Scalable-FinTech-Wallet-Payment-Backend.git
 cd Finpay-Scalable-FinTech-Wallet-Payment-Backend
 ```
 
-### 2. Install Dependencies
+### 2. Install dependencies
 
 ```bash
 npm install
 ```
 
-### 3. Configure Environment Variables
+### 3. Configure environment variables
 
-Create a `.env` file in the root directory:
+Create `backend/.env` from `backend/.env.example`:
 
 ```env
 PORT=5000
-
-MONGO_URI=mongodb://127.0.0.1:27017/finpay
-
-JWT_SECRET=your_super_secret_key
-
-GEMINI_API_KEY=your gemini api key
+MONGO_URI=mongodb://127.0.0.1:27017/finpe
+JWT_SECRET=replace_with_a_long_secret
+GEMINI_API_KEY=your_gemini_api_key
 ```
 
-For production deployments, replace the MongoDB URI with your MongoDB Atlas connection string.
+Optionally, create `frontend/.env` for a custom API address:
 
----
+```env
+VITE_API_URL=http://localhost:5000/api
+```
 
-##  Running the Project
+### 4. Run the app
 
-## Run seed file
-
-node seed.js
-
-### Development Mode
+Open two terminals from the project root:
 
 ```bash
-npm run dev
+npm run dev:backend
 ```
-
-### Production Mode
 
 ```bash
-npm start
+npm run dev:frontend
 ```
 
-Server will start on:
+The frontend runs at `http://localhost:5173` and the backend runs at `http://localhost:5000`.
+
+### Optional: seed demo users
 
 ```bash
-http://localhost:5000
+npm --prefix backend run seed
 ```
 
----
+Seeded users use password `password123` and MPIN `1234`.
 
-##  API Documentation
+## API overview
 
-Swagger UI is available at:
-
-```bash
-http://localhost:5000/api-docs
-```
-
-Use Swagger to:
-
-* Explore available endpoints
-* Test APIs interactively
-* View request/response schemas
-
----
-
-##  Postman Documentation
-
-Interactive Postman Documentation:
-
-https://documenter.getpostman.com/view/46688304/2sBXwsMqXe
-
-## Demo
-<img width="1670" height="897" alt="image" src="https://github.com/user-attachments/assets/4c74cd06-a1ea-401c-b442-ae28df901197" />
-
-
-### Import Collection
-
-1. Open Postman
-2. Click **Import**
-3. Import the provided collection
-4. Register or Login
-5. Copy JWT token (or use collection automation)
-6. Test all protected endpoints
-
----
-
-##  Authentication Flow
-
-### Register User
+All protected routes require:
 
 ```http
-POST /api/auth/register
+Authorization: Bearer YOUR_JWT_TOKEN
 ```
 
-Request Body:
+| Method | Endpoint | Purpose |
+| --- | --- | --- |
+| POST | `/api/auth/register` | Create an account and Finpe UPI ID |
+| POST | `/api/auth/login` | Log in and receive a JWT |
+| GET | `/api/auth/profile` | Get the authenticated user profile |
+| POST | `/api/auth/setup-mpin` | Set a four-digit MPIN |
+| POST | `/api/wallet/add-money` | Add demo funds to the wallet |
+| POST | `/api/wallet/pay-bill` | Pay a simulated utility bill |
+| POST | `/api/transactions/send` | Send money securely |
+| GET | `/api/transactions/history` | Get transaction history |
+| GET | `/api/ai/summary` | Generate financial insights |
 
-```json
-{
-  "name": "John Doe",
-  "email": "john@example.com",
-  "phone": "9876543210",
-  "password": "Password@123"
-}
-```
-
----
-
-### Login User
-
-```http
-POST /api/auth/login
-```
-
-Request Body:
-
-```json
-{
-  "email": "john@example.com",
-  "password": "Password@123"
-}
-```
-
-Returns:
-
-```json
-{
-  "token": "jwt_token"
-}
-```
-
----
-
-### Setup MPIN
-
-```http
-POST /api/auth/setup-mpin
-```
-
-Request Body:
-
-```json
-{
-  "mpin": "1234"
-}
-```
-
----
-
-## Wallet APIs
-
-### Add Money
-
-```http
-POST /api/wallet/add-money
-```
-
-Request:
-
-```json
-{
-  "amount": 1000
-}
-```
-
----
-
-### Pay Bill
-
-```http
-POST /api/wallet/pay-bill
-```
-
-Request:
-
-```json
-{
-  "billerName": "Electricity Board",
-  "amount": 500,
-  "mpin": "1234"
-}
-```
-
----
-
-##  Transaction APIs
-
-### Send Money
+### Send money
 
 ```http
 POST /api/transactions/send
+Authorization: Bearer YOUR_JWT_TOKEN
+Idempotency-Key: 9d8f5b49-b082-4a76-a77e-demo-transfer
+Content-Type: application/json
 ```
-
-Request:
 
 ```json
 {
-  "receiverIdentifier": "9876543210",
+  "receiverIdentifier": "friend@finpe",
   "amount": 250,
-  "mpin": "1234"
+  "mpin": "1234",
+  "description": "Buying books"
 }
 ```
 
-or
+The `description` is optional. The `Idempotency-Key` must be unique for every new payment.
 
-```json
-{
-  "receiverIdentifier": "user@example.com",
-  "amount": 250,
-  "mpin": "1234"
-}
+## Deployment
+
+The frontend is deployed on Netlify and the backend is deployed on Render.
+
+For a production frontend build, configure this Netlify environment variable:
+
+```env
+VITE_API_URL=https://finpay-scalable-fintech-wallet-payment.onrender.com/api
 ```
 
----
+The `/api` suffix is required because all Express routes are mounted under `/api`.
 
-### Transaction History
-
-```http
-GET /api/transactions/history
-```
-
-Returns all wallet, transfer, and bill-payment transactions associated with the authenticated user.
 
 ---
 
-### AI Transaction Insights
-
-```http
-GET /api/ai/summary
-```
-
-**Authorization:** `Bearer YOUR_TOKEN`
-
-Returns AI-powered financial insights for the authenticated user by analyzing transaction data. The response includes a financial summary, category-wise expense breakdown, key spending insights, personalized recommendations, and additional financial metrics generated using the Google Gemini API.
-
----
-
-##  Security Features
-
-* JWT Authentication
-* Password Hashing (Bcrypt)
-* MPIN Verification Layer
-* Protected Routes Middleware
-* Transaction Validation
-* Insufficient Balance Checks
-* Secure User Lookup
-
----
 
 ## Demo
 
@@ -382,10 +199,14 @@ Returns AI-powered financial insights for the authenticated user by analyzing tr
 
 <img width="5629" height="6808" alt="deepseek_mermaid_20260613_a06f77" src="https://github.com/user-attachments/assets/32f9b15f-c81f-48d8-af3e-df0812e8ccb7" />
 
+## Security notes
 
+- Passwords and MPINs are stored as hashes, never plain text.
+- JWT middleware protects wallet, payment, history, and insight endpoints.
+- MPIN is required before making a transfer or bill payment.
+- Atomic balance updates protect against spending beyond the available wallet balance.
+- Idempotency records prevent the same logical payment from being processed twice.
 
-##  License
+## License
 
-This project is licensed under the MIT License 
-
-
+This project is licensed under the MIT License.
