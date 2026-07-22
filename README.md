@@ -366,6 +366,18 @@ Returns AI-powered financial insights for the authenticated user by analyzing tr
 
 ---
 
+## Demo
+
+<img width="1710" height="790" alt="Screenshot 2026-07-17 223225" src="https://github.com/user-attachments/assets/4886cc47-9fb4-4ad9-b048-b9daf88bc33a" />
+
+
+<img width="1186" height="906" alt="Screenshot 2026-07-17 223832" src="https://github.com/user-attachments/assets/d19e9750-6f22-46cb-ab8e-8fa4f374ccf6" />
+
+
+<img width="1186" height="906" alt="Screenshot 2026-07-17 223832" src="https://github.com/user-attachments/assets/59026098-6334-4da5-ad53-a67d52769bc5" />
+
+---
+
 ## Sequence Diagram
 
 <img width="5629" height="6808" alt="deepseek_mermaid_20260613_a06f77" src="https://github.com/user-attachments/assets/32f9b15f-c81f-48d8-af3e-df0812e8ccb7" />
