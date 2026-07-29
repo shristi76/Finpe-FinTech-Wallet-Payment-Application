@@ -1,6 +1,8 @@
 export default function AddMoneyCard({
   amount,
   onAmountChange,
+  mpin,
+  onMpinChange,
   onSubmit,
   busy,
 }) {
@@ -25,6 +27,19 @@ export default function AddMoneyCard({
           onChange={(event) =>
             onAmountChange(event.target.value)
           }
+        />
+
+        <input
+          aria-label="MPIN"
+          required
+          type="password"
+          inputMode="numeric"
+          pattern="[0-9]{4}"
+          minLength="4"
+          maxLength="4"
+          placeholder="4-digit MPIN"
+          value={mpin}
+          onChange={(event) => onMpinChange(event.target.value)}
         />
 
         <button disabled={busy}>

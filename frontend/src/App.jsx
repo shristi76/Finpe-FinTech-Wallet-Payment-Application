@@ -54,6 +54,7 @@ export default function App() {
   });
 
   const [topUp, setTopUp] = useState("");
+  const [topUpMpin, setTopUpMpin] = useState("");
   const [newMpin, setNewMpin] = useState("");
 
   const [history, setHistory] = useState([]);
@@ -156,12 +157,14 @@ export default function App() {
           method: "POST",
           body: JSON.stringify({
             amount: topUp,
+            mpin: topUpMpin,
           }),
         },
         session.token
       );
 
       setTopUp("");
+      setTopUpMpin("");
       await refresh();
 
       setNotice(data.message);
@@ -340,6 +343,8 @@ export default function App() {
         <AddMoneyCard
           amount={topUp}
           onAmountChange={setTopUp}
+          mpin={topUpMpin}
+          onMpinChange={setTopUpMpin}
           onSubmit={addMoney}
           busy={busy}
         />

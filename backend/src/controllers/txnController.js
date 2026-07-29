@@ -1,5 +1,6 @@
 const Transaction = require('../models/Transaction');
 const User = require('../models/User');
+const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const { claimPayment, completePayment, failPayment } = require('../services/idempotencyService');
 
@@ -30,22 +31,32 @@ const sendMoney = async (req, res) => {
     if (claim.replay) return res.status(200).json({ ...claim.replay, idempotentReplay: true });
     paymentRequest = claim.request;
 
-    const updatedSender = await User.findOneAndUpdate(
-      { _id: senderId, balance: { $gte: paymentAmount } },
-      { $inc: { balance: -paymentAmount } }, { new: true }
-    );
-    if (!updatedSender) {
-      await failPayment(paymentRequest, 'Insufficient balance');
-      return res.status(400).json({ message: 'Insufficient balance' });
-    }
-    await User.updateOne({ _id: receiver._id }, { $inc: { balance: paymentAmount } });
+    let response;
+    const session = await mongoose.startSession();
+    try {
+      await session.withTransaction(async () => {
+        const updatedSender = await User.findOneAndUpdate(
+          { _id: senderId, balance: { $gte: paymentAmount } },
+          { $inc: { balance: -paymentAmount } }, { new: true, session }
+        );
+        if (!updatedSender) {
+          const error = new Error('Insufficient balance');
+          error.statusCode = 400;
+          throw error;
+        }
 
-    const transaction = await Transaction.create({
-      sender: senderId, receiver: receiver._id, type: 'TRANSFER', amount: paymentAmount, description: paymentDescription || undefined,
-      status: 'SUCCESS', idempotencyKey: req.get('Idempotency-Key'),
-    });
-    const response = { message: 'Money transfer successful', transaction, newBalance: updatedSender.balance };
-    await completePayment(paymentRequest, response, transaction);
+        await User.updateOne({ _id: receiver._id }, { $inc: { balance: paymentAmount } }, { session });
+        const [transaction] = await Transaction.create([{
+          sender: senderId, receiver: receiver._id, type: 'TRANSFER', amount: paymentAmount, description: paymentDescription || undefined,
+          status: 'SUCCESS', idempotencyKey: req.get('Idempotency-Key'),
+        }], { session });
+        response = { message: 'Money transfer successful', transaction, newBalance: updatedSender.balance };
+        await completePayment(paymentRequest, response, transaction, session);
+      });
+    } finally {
+      await session.endSession();
+    }
+
     return res.status(201).json(response);
   } catch (error) {
     if (paymentRequest) await failPayment(paymentRequest, error.message);

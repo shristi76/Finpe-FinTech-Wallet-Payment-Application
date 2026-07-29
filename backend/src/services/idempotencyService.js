@@ -37,8 +37,10 @@ const claimPayment = async (req, payload) => {
   }
 };
 
-const completePayment = (request, response, transaction) => PaymentRequest.findByIdAndUpdate(
-  request._id, { status: 'COMPLETED', response, transaction: transaction._id }
+const completePayment = (request, response, transaction, session) => PaymentRequest.findByIdAndUpdate(
+  request._id,
+  { status: 'COMPLETED', response, transaction: transaction._id },
+  { session }
 );
 const failPayment = (request, message) => PaymentRequest.findByIdAndUpdate(
   request._id, { status: 'FAILED', response: { message } }
