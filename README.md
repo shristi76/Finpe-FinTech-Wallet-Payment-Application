@@ -26,6 +26,7 @@ A key feature of the project is **idempotent payment processing**, ensuring that
   - Finpe UPI ID (`username@finpe`)
 - Optional payment description
 - Complete transaction history
+- Designed concurrency-safe balance updates using conditional atomic database operations to prevent overspending when multiple payment requests occur simultaneously.
 - AI-generated transaction insights using Google Gemini
 - Idempotent payment processing
 - Swagger API documentation
