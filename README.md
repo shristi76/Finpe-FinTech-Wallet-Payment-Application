@@ -219,34 +219,6 @@ A new **Idempotency-Key** must be generated for every new payment request.
 
 ---
 
-#  Deployment
-
-## Frontend
-
-Hosted on **Netlify**
-
-```
-https://finpee.netlify.app/
-```
-
-## Backend
-
-Hosted on **Render**
-
-```
-https://finpay-scalable-fintech-wallet-payment.onrender.com/
-```
-
-For production, configure
-
-```env
-VITE_API_URL=https://finpay-scalable-fintech-wallet-payment.onrender.com/api
-```
-
-The `/api` suffix is required because all Express routes are mounted under `/api`.
-
----
-
 #  Demo
 
 ### Home
