@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # Finpe — Scalable FinTech Wallet & Payment Application
+=======
+Finpe — Scalable FinTech Wallet & Payment Application
+>>>>>>> 80456cd6bf555ba664ec0e192f3303fe3e681e56
 
 Finpe is a full-stack digital wallet application inspired by modern UPI payment apps. Users can register, set a secure MPIN, add demo money, transfer money using a phone number or Finpe UPI ID, track payments, and generate AI-powered transaction insights.
 
@@ -6,7 +10,11 @@ The project also implements **idempotency keys** so a repeated payment request i
 
 ## Live demo
 
+<<<<<<< HEAD
 - Frontend: [strong-pudding-56f2c5.netlify.app](https://strong-pudding-56f2c5.netlify.app/)
+=======
+- Frontend: [https://finpee.netlify.app/](https://finpee.netlify.app/)
+>>>>>>> 80456cd6bf555ba664ec0e192f3303fe3e681e56
 - Backend API: [finpay-scalable-fintech-wallet-payment.onrender.com](https://finpay-scalable-fintech-wallet-payment.onrender.com/)
 - Swagger API docs: [API documentation](https://finpay-scalable-fintech-wallet-payment.onrender.com/api-docs)
 
@@ -34,6 +42,7 @@ The backend stores a payment request using the authenticated user and key, along
 First request with a key        → Payment is processed once
 Same key + same payment details → Previous successful response is returned
 Same key + changed details      → 409 Conflict
+<<<<<<< HEAD
 ```
 
 This protects users from double-clicks, automatic retries, and unreliable network connections.
@@ -82,6 +91,56 @@ git clone https://github.com/shristi76/Finpay-Scalable-FinTech-Wallet-Payment-Ba
 cd Finpay-Scalable-FinTech-Wallet-Payment-Backend
 ```
 
+=======
+```
+
+This protects users from double-clicks, automatic retries, and unreliable network connections.
+
+## Tech stack
+
+| Area | Technologies |
+| --- | --- |
+| Frontend | React, Vite, CSS |
+| Backend | Node.js, Express.js |
+| Database | MongoDB, Mongoose |
+| Authentication | JWT, BcryptJS |
+| AI insights | Google Gemini API |
+| API testing | Swagger UI, Postman |
+
+## Project structure
+
+```text
+finpe/
+├── backend/
+│   ├── src/
+│   │   ├── config/          # MongoDB connection
+│   │   ├── controllers/     # Request handling
+│   │   ├── middleware/      # JWT authentication
+│   │   ├── models/          # User, transaction, and payment request schemas
+│   │   ├── routes/          # API routes
+│   │   └── services/        # AI and idempotency services
+│   ├── server.js
+│   ├── seed.js
+│   └── .env
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   └── App.jsx
+│   ├── index.html
+│   └── vite.config.js
+└── package.json
+```
+
+## Local setup
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/shristi76/Finpe-FinTech-Wallet-Payment-Application
+cd Finpe-FinTech-Wallet-Payment-Application
+```
+
+>>>>>>> 80456cd6bf555ba664ec0e192f3303fe3e681e56
 ### 2. Install dependencies
 
 ```bash
@@ -178,9 +237,35 @@ VITE_API_URL=https://finpay-scalable-fintech-wallet-payment.onrender.com/api
 ```
 
 The `/api` suffix is required because all Express routes are mounted under `/api`.
+<<<<<<< HEAD
 
 ## Security notes
 
+=======
+
+
+---
+
+
+## Demo
+
+<img width="1710" height="790" alt="Screenshot 2026-07-17 223225" src="https://github.com/user-attachments/assets/4886cc47-9fb4-4ad9-b048-b9daf88bc33a" />
+
+
+<img width="1186" height="906" alt="Screenshot 2026-07-17 223832" src="https://github.com/user-attachments/assets/d19e9750-6f22-46cb-ab8e-8fa4f374ccf6" />
+
+
+<img width="1186" height="906" alt="Screenshot 2026-07-17 223832" src="https://github.com/user-attachments/assets/59026098-6334-4da5-ad53-a67d52769bc5" />
+
+---
+
+## Sequence Diagram
+
+<img width="5629" height="6808" alt="deepseek_mermaid_20260613_a06f77" src="https://github.com/user-attachments/assets/32f9b15f-c81f-48d8-af3e-df0812e8ccb7" />
+
+## Security notes
+
+>>>>>>> 80456cd6bf555ba664ec0e192f3303fe3e681e56
 - Passwords and MPINs are stored as hashes, never plain text.
 - JWT middleware protects wallet, payment, history, and insight endpoints.
 - MPIN is required before making a transfer or bill payment.
