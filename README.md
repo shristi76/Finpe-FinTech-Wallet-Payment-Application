@@ -236,6 +236,12 @@ A new **Idempotency-Key** must be generated for every new payment request.
 
 ---
 
+### Added MongoDB transactional payment processing to atomically debit sender balances, credit receivers, create transaction records, and maintain consistent payment state during concurrent requests.
+
+<img width="1435" height="745" alt="Screenshot 2026-08-05 221337" src="https://github.com/user-attachments/assets/36651b50-51b2-4812-b7dc-b7e7c41ea6ce" />
+
+---
+
 #  Sequence Diagram
 
 <img width="5629" alt="Sequence Diagram" src="https://github.com/user-attachments/assets/32f9b15f-c81f-48d8-af3e-df0812e8ccb7" />
